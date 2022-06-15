@@ -29,6 +29,14 @@ func (o optionFunc) apply(ops *options) {
 type options struct {
 	output      []string
 	timeEncoder zapcore.TimeEncoder
+	encoding    string
+}
+
+// WithEncoding Specify logger format, the valid "json" and "console".
+func WithEncoding(encoding string) Option {
+	return optionFunc(func(ops *options) {
+		ops.encoding = encoding
+	})
 }
 
 func WithOutput(output ...string) Option {

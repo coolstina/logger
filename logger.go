@@ -45,6 +45,7 @@ func NewLoggerOr(ops ...Option) *zap.Logger {
 	var options = &options{
 		output:      []string{"stdout"},
 		timeEncoder: zapcore.RFC3339TimeEncoder,
+		encoding:    "json",
 	}
 
 	for _, o := range ops {
@@ -55,6 +56,7 @@ func NewLoggerOr(ops ...Option) *zap.Logger {
 		config := zap.NewProductionConfig()
 		config.OutputPaths = options.output
 		config.EncoderConfig.EncodeTime = options.timeEncoder
+		config.Encoding = options.encoding
 
 		li, err = config.Build(zap.AddCallerSkip(1))
 		if err != nil {

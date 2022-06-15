@@ -20,7 +20,11 @@ import (
 )
 
 func main() {
-	logger.Configuration(logger.WithOutput("app.log"), logger.WithTimeEncoder(zapcore.RFC3339NanoTimeEncoder))
+	logger.Configuration(
+		logger.WithOutput("app.log"),
+		logger.WithTimeEncoder(zapcore.RFC3339NanoTimeEncoder),
+		logger.WithEncoding("console"),
+	)
 
 	logger.Infof("upgrade status: %v", true)
 	logger.Infow("upgrade info", "status", true)
